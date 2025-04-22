@@ -17,24 +17,35 @@
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 	</properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<classifier>---- select project type ----</classifier>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+		<build>
+		  <plugins>
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-clean-plugin</artifactId>
+		      <version>3.2.0</version>
+		    </plugin>
+		    <plugin>
+		      <groupId>org.mule.tools.maven</groupId>
+		      <artifactId>mule-maven-plugin</artifactId>
+		      <version>${mule.maven.plugin.version}</version>
+		      <extensions>true</extensions>
+		      <configuration>
+		        <classifier>mule-application</classifier> 
+		        <deployment>
+		          <target>cloudhub</target>
+		          <cloudhub>
+		            <region>us-east-1</region>
+		            <organization>f41c8fe2-708c-41b6-b631-2e6a30ce8045</organization> 
+		            <environment>dev</environment> 
+		            <appName>s-test-rjaencobos-dev</appName> 
+		            <runtimeVersion>${app.runtime}</runtimeVersion>
+		          </cloudhub>
+		        </deployment>
+		      </configuration>
+		    </plugin>
+		  </plugins>
+		</build>
+
 
 	<dependencies>
 		<dependency>
