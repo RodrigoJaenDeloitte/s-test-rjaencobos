@@ -35,4 +35,4 @@ jobs:
             -DmuleVersion=4.9.2 \
             -DappName=s-test-rjaencobos \
             -DpublicURL=s-test-rjaencobos-dev.example.com \
-            --settings .maven/settings
+            --settings .maven/settings.xml
