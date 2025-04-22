@@ -20,7 +20,7 @@
     <mule.username>${env.MULE_USERNAME}</mule.username>
     <mule.password>${env.MULE_PASSWORD}</mule.password>
     <appName>s-test-rjaencobos</appName>
-    <publicUrl>https://repository.mulesoft.org/nexus/content/repositories/releases</publicUrl>
+    <publicUrl>https://example.com</publicUrl>
   </properties>
 
   <build>
@@ -63,6 +63,28 @@
     </plugins>
   </build>
 
+  <repositories>
+    <repository>
+      <id>anypoint-exchange-v3</id>
+      <name>Anypoint Exchange</name>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+      <layout>default</layout>
+    </repository>
+    <repository>
+      <id>mulesoft-releases</id>
+      <name>MuleSoft Releases Repository</name>
+      <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>mulesoft-releases</id>
+      <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <dependencies>
     <dependency>
       <groupId>org.mule.connectors</groupId>
@@ -95,19 +117,4 @@
       <classifier>mule-plugin</classifier>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>anypoint-exchange-v3</id>
-      <name>Anypoint Exchange</name>
-      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-      <layout>default</layout>
-    </repository>
-    <repository>
-      <id>mulesoft-releases</id>
-      <name>MuleSoft Releases Repository</name>
-      <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
 </project>

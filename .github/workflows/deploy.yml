@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin' # Especifica la distribución de Java
+          distribution: 'temurin'
 
       - name: Build Mule application
         run: mvn clean package
