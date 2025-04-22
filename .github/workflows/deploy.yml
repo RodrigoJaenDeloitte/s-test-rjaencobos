@@ -30,12 +30,21 @@ jobs:
             <servers>
               <server>
                 <id>exchange-server</id>
-                <username>${{ secrets.ANYPOINT_USERNAME }}</username>
-                <password>${{ secrets.ANYPOINT_PASSWORD }}</password>
+                <username>${{ secrets.ANYPOINT_CLIENT_ID }}</username>
+                <password>${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
               </server>
             </servers>
           </settings>
           EOF
 
       - name: Deploy to CloudHub
-        run: mvn clean deploy -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=dev
+        run: >
+          mvn clean deploy -DmuleDeploy 
+          -Danypoint.platform.client_id=${{ secrets.ANYPOINT_CLIENT_ID }} 
+          -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_CLIENT_SECRET }} 
+          -Danypoint.org.id=${{ secrets.ANYPOINT_ORG_ID }} 
+          -Danypoint.environment=dev 
+          -Dcloudhub.app.name=s-test-rjaencobos-impl 
+          -Dcloudhub.region=us-east-1 
+          -Dcloudhub.worker.type=MICRO 
+          -Dcloudhub.workers=1
