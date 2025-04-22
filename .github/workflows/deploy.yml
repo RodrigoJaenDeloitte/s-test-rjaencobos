@@ -1,50 +1,38 @@
-name: CI - Deploy to CloudHub
+name: Deploy to CloudHub 2.0
 
 on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout project
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Java
+      - name: Set up Maven
         uses: actions/setup-java@v3
         with:
           java-version: '8'
           distribution: 'adopt'
+          cache: maven
 
-      - name: Set up Maven settings.xml
+      - name: Build and Deploy to CloudHub 2.0
+        env:
+          MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+          anypoint_username: ${{ secrets.ANYPOINT_USERNAME }}
+          anypoint_password: ${{ secrets.ANYPOINT_PASSWORD }}
         run: |
-          mkdir -p ~/.m2
-          cat <<EOF > ~/.m2/settings.xml
-          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                        https://maven.apache.org/xsd/settings-1.0.0.xsd">
-            <servers>
-              <server>
-                <id>exchange-server</id>
-                <username>${{ secrets.ANYPOINT_CLIENT_ID }}</username>
-                <password>${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-
-      - name: Deploy to CloudHub
-        run: >
-          mvn clean deploy -DmuleDeploy -e -x
-          -Danypoint.platform.client_id=${{ secrets.ANYPOINT_CLIENT_ID }} 
-          -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_CLIENT_SECRET }} 
-          -Danypoint.org.id=${{ secrets.ANYPOINT_ORG_ID }} 
-          -Danypoint.environment=dev 
-          -Dcloudhub.app.name=s-test-rjaencobos-impl 
-          -Dcloudhub.region=us-east-1 
-          -Dcloudhub.worker.type=MICRO 
-          -Dcloudhub.workers=1
+          mvn clean deploy \
+            -Danypoint.username="$anypoint_username" \
+            -Danypoint.password="$anypoint_password" \
+            -Denvironment=dev \
+            -DtargetName=DEV-Worker \
+            -DmuleVersion=4.9.2 \
+            -DappName=s-test-rjaencobos \
+            -DpublicURL=s-test-rjaencobos-dev.example.com \
+            --settings .maven/settings
