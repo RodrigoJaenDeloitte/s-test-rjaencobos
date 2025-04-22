@@ -1,51 +1,41 @@
-name: MuleSoft CI/CD Pipeline
+name: CI - Deploy to CloudHub
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout project
         uses: actions/checkout@v3
 
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: '8'
+          distribution: 'adopt'
 
-      - name: Build Mule application
-        run: mvn clean package
-
-      - name: Run tests
-        run: mvn test
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to CloudHub 2.0
-        env:
-          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
-          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
-          ANYPOINT_ORG_ID: ${{ secrets.ANYPOINT_ORG_ID }}
-          ANYPOINT_ENV_ID: ${{ secrets.ANYPOINT_ENV_ID }}
+      - name: Set up Maven settings.xml
         run: |
-          echo "Deploying Mule application to CloudHub 2.0..."
-          mvn mule:deploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} \
-                          -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} \
-                          -Danypoint.orgId=${{ secrets.ANYPOINT_ORG_ID }} \
-                          -Danypoint.envId=${{ secrets.ANYPOINT_ENV_ID }}
+          mkdir -p ~/.m2
+          cat <<EOF > ~/.m2/settings.xml
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                        https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>anypoint-exchange-v3</id>
+                <username>${{ secrets.ANYPOINT_USERNAME }}</username>
+                <password>${{ secrets.ANYPOINT_PASSWORD }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
+      - name: Deploy to CloudHub
+        run: mvn clean deploy -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=dev
