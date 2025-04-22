@@ -39,7 +39,7 @@ jobs:
 
       - name: Deploy to CloudHub
         run: >
-          mvn clean deploy -DmuleDeploy 
+          mvn clean deploy -DmuleDeploy -e -x
           -Danypoint.platform.client_id=${{ secrets.ANYPOINT_CLIENT_ID }} 
           -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_CLIENT_SECRET }} 
           -Danypoint.org.id=${{ secrets.ANYPOINT_ORG_ID }} 
