@@ -1,0 +1,11 @@
+http:
+  port: "8081"
+  
+api:
+  id: "20286632"
+  
+salesforce:
+  username: "![FBeruK85/sXFzrBSPwPvH6OLfGtuo1TxiEY5No5SvOA=]"
+  password: "![hti4gSHFgvjWAGNu8thDrw==]"
+  token: "![3ZadRYPBA7h6oVyBSpGMbCWYbfJKRYNTxJat1nqGwog=]"
+  url: "![idGap9vwmNIOWdGESjtSNXJWosjs0aNk+zMrRxzVGGy9KQc739MQsCwUshtY3XFIFUChpEKCNBo=]"
