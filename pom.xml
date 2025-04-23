@@ -35,7 +35,7 @@
                     <cloudhub2Deployment>
                         <uri>https://anypoint.mulesoft.com</uri>
                         <provider>MC</provider>
-    					<environmentId>${{ secrets.ANYPOINT_ENV_ID }}</environmentId>
+    					<environment>SANDBOX</environment> 
                         <target>Cloudhub-US-East-2</target>
                         <muleVersion>${app.runtime}</muleVersion>
                         <username>${{ secrets.ANYPOINT_USERNAME }}</username>
