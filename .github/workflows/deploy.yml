@@ -38,4 +38,4 @@ jobs:
           EOF
 
       - name: Deploy to CloudHub
-        run: mvn clean deploy -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=Sandbox
+        run: mvn clean deploy -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=12e731dc323c49f1923ab56bb4ff89d9

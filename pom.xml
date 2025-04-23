@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <app.runtime>4.9.2</app.runtime>
-        <mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
+        <mule.maven.plugin.version>4.4.0</mule.maven.plugin.version>
     </properties>
 
     <distributionManagement>
@@ -35,7 +35,7 @@
                     <cloudhub2Deployment>
                         <uri>https://anypoint.mulesoft.com</uri>
                         <provider>MC</provider>
-    					<environment>SANDBOX</environment> 
+						<environmentId>12e731dc323c49f1923ab56bb4ff89d9</environmentId>
                         <target>Cloudhub-US-East-2</target>
                         <muleVersion>${app.runtime}</muleVersion>
                         <username>${{ secrets.ANYPOINT_USERNAME }}</username>
