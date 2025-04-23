@@ -38,9 +38,11 @@ jobs:
           EOF
 
       - name: Deploy to Exchange
-        run: mvn deploy -DskipTests \
-          -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} \
-          -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }}
+        run: |
+          mvn deploy -DskipTests \
+            -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} \
+            -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }}
+        
 
       - name: Deploy to CloudHub
         run: mvn clean deploy -X -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=Sandbox 
