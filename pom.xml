@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany</groupId>
-    <artifactId>s-test-rjaencobos</artifactId>
+    <artifactId>s-test-rjaencobos-impl</artifactId>
     <version>1.0.1</version>
     <packaging>mule-application</packaging>
 
