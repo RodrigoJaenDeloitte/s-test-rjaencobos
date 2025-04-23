@@ -40,7 +40,7 @@
                         <muleVersion>${app.runtime}</muleVersion>
                         <username>${{ secrets.ANYPOINT_USERNAME }}</username>
                         <password>${{ secrets.ANYPOINT_PASSWORD }}</password>
-                        <applicationName>s-test-rjaencobos-impl</applicationName>
+                        <applicationName>s-test-rjaencobos</applicationName>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
                         <deploymentSettings>
