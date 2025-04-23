@@ -3,7 +3,7 @@
 
 	<groupId>f41c8fe2-708c-41b6-b631-2e6a30ce8045</groupId>
     <artifactId>s-test-rjaencobos-impl</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.1</version>
     <packaging>mule-application</packaging>
 
     <name>s-test-rjaencobos</name>
