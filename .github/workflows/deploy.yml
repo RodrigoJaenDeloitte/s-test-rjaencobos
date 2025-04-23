@@ -38,6 +38,8 @@ jobs:
           EOF
 
         
+      - name: Print Mule runtime version
+        run: mvn help:evaluate -Dexpression=mule.runtime.version -q -DforceStdout
 
       - name: Deploy to CloudHub
         run: mvn clean deploy -X -DmuleDeploy -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.environment=Sandbox 
